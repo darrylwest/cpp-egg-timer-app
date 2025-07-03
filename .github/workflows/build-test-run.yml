@@ -68,4 +68,4 @@ jobs:
     - name: Run
       run: |
         echo "=== Running eggtimer-app ==="
-        ./build/eggtimer-app
+        ./build/eggtimer-app --help
