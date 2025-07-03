@@ -2,6 +2,7 @@
 
 #include <app/cli.hpp>
 #include <vendor/cxxopts.hpp>
+#include <iostream>
 
 namespace app::eggtimer {
 
@@ -18,7 +19,7 @@ namespace app::eggtimer {
             auto result = options.parse(argc, argv);
 
             if (result.count("help")) {
-                std::println("{}", options.help());
+                std::cout << options.help() << '\n';
                 config.dry_run = true;
                 return config;
             }
