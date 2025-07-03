@@ -32,8 +32,5 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    constexpr auto lang = "c++";
-    spdlog::info("Hello and welcome to {} eggtimer application, version: {}", lang, app::eggtimer::VERSION);
-
     return 0;
 }

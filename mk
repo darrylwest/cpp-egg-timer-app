@@ -54,7 +54,7 @@ do
             shift
         ;;
         run)
-            ./build/$project
+            ./build/$project --help
 
             shift
         ;;
