@@ -20,11 +20,10 @@ constexpr std::string_view BANNER = R"(
 int main() {
     using namespace termio::termio;
 
-    std::println("{}{}\n{}Version: {}{}", green(), BANNER, yellow(), app::eggtimer::VERSION,
-                 reset()) constexpr auto lang
-        = "c++";
-    spdlog::info("Hello and welcome to {} eggtimer application, version: {}", lang,
-                 app::eggtimer::VERSION);
+    std::println("{}{}\n{}Version: {}{}", green(), BANNER, yellow(), app::eggtimer::VERSION, reset());
+
+    constexpr auto lang = "c++";
+    spdlog::info("Hello and welcome to {} eggtimer application, version: {}", lang, app::eggtimer::VERSION);
 
     return 0;
 }

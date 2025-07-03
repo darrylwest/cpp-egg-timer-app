@@ -4,7 +4,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() function
 
 #include <catch2/catch_all.hpp>
-#include <app/tiny.hpp>
+#include <app/eggtimer.hpp>
 #include <spdlog/spdlog.h>
 #include <print>
 #include <termio/termio.hpp>
@@ -36,6 +36,6 @@ MainTestSetup setup;
 
 // Tests here
 TEST_CASE("Version test", "[version]") {
-    const auto vers = app::tiny::VERSION;
-    REQUIRE(vers == app::tiny::VERSION);
+    const auto vers = app::eggtimer::VERSION;
+    REQUIRE(vers == app::eggtimer::VERSION);
 }
