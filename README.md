@@ -1,4 +1,4 @@
-# EggTimer Application Starter
+# Egg Timer Application
 
 ```
  _______                    _______ __                      
