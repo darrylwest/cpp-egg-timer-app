@@ -17,6 +17,11 @@ This document summarizes key information and patterns learned during interaction
 - **System Dependencies:** `cmake`, `ninja-build`, and `git` are installed via `apt-get`.
 - **Direct Unit Test Execution:** Unit tests are executed directly by running the compiled executable `./build/unit_tests` rather than using `ctest`.
 
+## Company C++ Style Preferences
+
+- **Structs vs. Classes:** Prefer `struct` over `class` for data-only structures.
+- **Function Pointers/Lambdas vs. Interfaces:** Prefer using function pointers or lambdas for callbacks and polymorphic behavior over defining explicit interfaces (abstract base classes).
+
 ## Local Development Workflow
 
 The project uses a `mk` bash script for common development tasks.
