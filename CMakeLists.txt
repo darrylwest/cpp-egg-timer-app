@@ -98,7 +98,8 @@ set(DEPENDENT_LIBRARIES
 
 # Add executables
 add_executable(eggtimer-app ${SRC_DIR}/main.cpp ${SRC_DIR}/cli.cpp ${SRC_DIR}/timer.cpp ${SRC_DIR}/command_executor.cpp ${SRC_DIR}/runner.cpp)
-add_executable(unit_tests tests/main_unit.cpp tests/cli_tests.cpp ${SRC_DIR}/cli.cpp tests/command_executor_tests.cpp ${SRC_DIR}/command_executor.cpp)
+add_executable(unit_tests tests/main_unit.cpp tests/cli_tests.cpp ${SRC_DIR}/cli.cpp ${SRC_DIR}/command_executor.cpp)
+add_executable(integration_tests tests/main_integration.cpp tests/integration_tests.cpp ${SRC_DIR}/command_executor.cpp)
 
 # Function to set up target properties
 function(setup_target_properties target)
@@ -125,13 +126,14 @@ function(setup_target_properties target)
 endfunction()
 
 # Use the function for each target
-foreach(target eggtimer-app unit_tests)
+foreach(target eggtimer-app unit_tests integration_tests)
     setup_target_properties(${target})
 endforeach()
 
 # Enable testing
 enable_testing()
 add_test(unit_tests COMMAND unit_tests)
+add_test(integration_tests COMMAND integration_tests)
 
 # Print compiler information
 message(STATUS "Compiler: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")

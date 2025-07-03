@@ -5,5 +5,5 @@
 #pragma once
 
 namespace app::eggtimer {
-    constexpr auto VERSION = "0.2.0-101";
+    constexpr auto VERSION = "0.3.0-105";
 }

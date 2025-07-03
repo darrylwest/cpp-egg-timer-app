@@ -30,7 +30,7 @@ do
         ;;
         all)
             ./mk pull 
-            ./mk clobber init test run
+            ./mk clobber init build unit run
 
             exit 0
         ;;
@@ -50,6 +50,12 @@ do
         unit|test)
             (cd build && time make $FLAGS)
             ./build/unit_tests
+
+            shift
+        ;;
+        int*)
+            (cd build && time make $FLAGS)
+            ./build/integration_tests
 
             shift
         ;;
@@ -89,14 +95,17 @@ do
             echo "Targets:"
             echo ""
             echo "   init     : run the cmake command to create the build folder"
-            echo "   build    : compile cryptor to the build folder"
-            echo "   run      : runs the web server app"
+            echo "   build    : compile eggtimer to the build folder"
+            echo "   run      : runs the eggtimer app"
+            echo "   unit     : runs unit tests"
+            echo "   int      : runs integration tests"
+            echo "   test     : runs all tests (unit and integration)"
             echo "   format   : runs clang-format over includes and src"
             echo "   watch    : run watcher over source and include"
             echo "   pull     : pull the latest repo changes"
             echo "   clean    : remove binary builds but leave the build folder"
             echo "   clobber  : remove the entire build folder"
-            echo "   all      : special target to clobber init build unit"
+            echo "   all      : special target to clobber init build test run"
             echo "   verbose  : show a verbose build"
             echo "   help     : show this help"
             
