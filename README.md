@@ -1,11 +1,6 @@
 # EggTimer Application Starter
 
 ```
- _______ __                _______ __               __                _______              
-|_     _|__|.-----.--.--. |     __|  |_.---.-.----.|  |_.-----.----. |   _   |.-----.-----.
-  |   | |  ||     |  |  | |__     |   _|  _  |   _||   _|  -__|   _| |       ||  _  |  _  |
-  |___| |__||__|__|___  | |_______|____|___._|__|  |____|_____|__|   |___|___||   __|   __|
-                  |_____|                                                     |__|  |__|   
 ```
 
 Minimal application startup.
@@ -19,8 +14,9 @@ Minimal application startup.
  
 ## Includes
 
-* spdlog
-* Catch2
+* spdlog - logging
+* Catch2 - testing
+* cpp-termio - terminal colors
 
 ## File Structure
 
@@ -57,6 +53,6 @@ There is also a GEMINI.md file with minimal rules.
 ###### dpw | 2025-07-03
 
 <!-- txkey for last update -->
-<p style="font-size: 5px;">
+<p id="txkey" style="font-size: 5px;">
 81NCxpnzuFgH
 </p>
