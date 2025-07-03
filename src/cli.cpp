@@ -14,7 +14,9 @@ namespace app::eggtimer {
 
             options.add_options()("s,seconds", "Timeout in seconds", cxxopts::value<int>())(
                 "m,minutes", "Timeout in minutes", cxxopts::value<int>())(
-                "H,hours", "Timeout in hours (H:M format)", cxxopts::value<std::string>())("h,help", "Print help");
+                "t,time", "Timeout in hours (H:M format)", cxxopts::value<std::string>())
+                ("d,dry-run", "Dry run mode", cxxopts::value<bool>()->default_value("false"))
+                ("h,help", "Print help");
 
             auto result = options.parse(argc, argv);
 
@@ -24,8 +26,12 @@ namespace app::eggtimer {
                 return config;
             }
 
-            if (result.count("hours")) {
-                std::string hours_str = result["hours"].as<std::string>();
+            if (result.count("dry-run")) {
+                config.dry_run = result["dry-run"].as<bool>();
+            }
+
+            if (result.count("time")) {
+                std::string hours_str = result["time"].as<std::string>();
                 size_t colon_pos = hours_str.find(':');
                 if (colon_pos == std::string::npos) {
                     throw CliError("Invalid --hours format. Use H:M.");
