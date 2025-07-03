@@ -17,10 +17,20 @@ constexpr std::string_view BANNER = R"(
                   |_____|                                                     |__|  |__|
 )";
 
-int main() {
+#include <app/cli.hpp>
+
+int main(int argc, char** argv) {
     using namespace termio::termio;
 
     std::println("{}{}\n{}Version: {}{}", green(), BANNER, yellow(), app::eggtimer::VERSION, reset());
+
+    try {
+        app::eggtimer::Config config = app::eggtimer::parse_cli_options(argc, argv);
+        spdlog::info("Parsed timeout: {} seconds", config.total_seconds);
+    } catch (const app::eggtimer::CliError& e) {
+        spdlog::error("CLI Error: {}", e.what());
+        return 1;
+    }
 
     constexpr auto lang = "c++";
     spdlog::info("Hello and welcome to {} eggtimer application, version: {}", lang, app::eggtimer::VERSION);

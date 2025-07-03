@@ -97,8 +97,8 @@ set(DEPENDENT_LIBRARIES
 )
 
 # Add executables
-add_executable(eggtimer-app ${SRC_DIR}/main.cpp)
-add_executable(unit_tests tests/main_unit.cpp)
+add_executable(eggtimer-app ${SRC_DIR}/main.cpp ${SRC_DIR}/cli.cpp)
+add_executable(unit_tests tests/main_unit.cpp tests/cli_tests.cpp ${SRC_DIR}/cli.cpp)
 
 # Function to set up target properties
 function(setup_target_properties target)
