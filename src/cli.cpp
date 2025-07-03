@@ -1,8 +1,8 @@
 #include <spdlog/spdlog.h>
 
 #include <app/cli.hpp>
-#include <vendor/cxxopts.hpp>
 #include <iostream>
+#include <vendor/cxxopts.hpp>
 
 namespace app::eggtimer {
 
@@ -13,10 +13,10 @@ namespace app::eggtimer {
             cxxopts::Options options("eggtimer-app", "Egg Timer Application");
 
             options.add_options()("s,seconds", "Timeout in seconds", cxxopts::value<int>())(
-                "m,minutes", "Timeout in minutes", cxxopts::value<int>())(
-                "t,time", "Timeout in hours (H:M format)", cxxopts::value<std::string>())
-                ("d,dry-run", "Dry run mode", cxxopts::value<bool>()->default_value("false"))
-                ("h,help", "Print help");
+                "m,minutes", "Timeout in minutes", cxxopts::value<int>())("t,time", "Timeout in hours (H:M format)",
+                                                                          cxxopts::value<std::string>())(
+                "d,dry-run", "Dry run mode", cxxopts::value<bool>()->default_value("false"))(
+                "c,run-command", "Command to run after timer", cxxopts::value<std::string>())("h,help", "Print help");
 
             auto result = options.parse(argc, argv);
 
@@ -28,6 +28,10 @@ namespace app::eggtimer {
 
             if (result.count("dry-run")) {
                 config.dry_run = result["dry-run"].as<bool>();
+            }
+
+            if (result.count("run-command")) {
+                config.runner_command = result["run-command"].as<std::string>();
             }
 
             if (result.count("time")) {

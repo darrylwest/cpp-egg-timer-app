@@ -4,12 +4,12 @@
 
 #include <spdlog/spdlog.h>
 
-#include <chrono>
-#include <thread>
 #include <app/eggtimer.hpp>
+#include <chrono>
 #include <print>
 #include <string>
 #include <termio/termio.hpp>
+#include <thread>
 
 constexpr std::string_view BANNER = R"(
  _______                    _______ __                      
@@ -20,6 +20,7 @@ constexpr std::string_view BANNER = R"(
 )";
 
 #include <app/cli.hpp>
+#include <app/runner.hpp>
 
 int main(int argc, char** argv) {
     using namespace termio::termio;
@@ -35,33 +36,16 @@ int main(int argc, char** argv) {
         }
 
         spdlog::info("Parsed timeout: {} seconds", config.total_seconds);
-        auto tick_time = 1s;
 
-        std::cout << "Timer version: " << VERSION << " started..." << std::endl;
-        auto start = high_resolution_clock::now();
-
-        auto limit = config.total_seconds;
-
-        for (auto i = 0; i < limit; i++) {
-            if (i % 10 == 0) {
-                // std::cout << t << " seconds, " << (limit * 10) - t << " remaining..." << std::endl;
-                std::print("\n{} seconds, {} remaining", i, limit - i);
-            }
-            std::print(".");
-            std::this_thread::sleep_for(tick_time * 1);
+        if (config.runner_command.empty()) {
+            app::eggtimer::DefaultTimerRunner default_runner(config.total_seconds);
+            default_runner.run();
+        } else {
+            app::eggtimer::CustomCommandRunner custom_runner(config.total_seconds, config.runner_command);
+            custom_runner.run();
         }
-
-        auto stop = high_resolution_clock::now();
-
-        duration<float> duration = stop - start;
-
-        std::string runner = "afplay /System/Library/Sounds/Funk.aiff";
-        std::println("\nTimer complete: {} seconds, running: {}", duration.count(), runner);
-
-        return std::system(runner.c_str());
     } catch (const app::eggtimer::CliError& e) {
         spdlog::error("CLI Error: {}", e.what());
         return 1;
     }
 }
-
