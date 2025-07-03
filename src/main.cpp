@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
         duration<float> duration = stop - start;
 
         std::string runner = "afplay /System/Library/Sounds/Funk.aiff";
-        std::println("Timer complete: {} seconds, running: {}", duration.count(), runner);
+        std::println("\nTimer complete: {} seconds, running: {}", duration.count(), runner);
 
         return std::system(runner.c_str());
     } catch (const app::eggtimer::CliError& e) {
