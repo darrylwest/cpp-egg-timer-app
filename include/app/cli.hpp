@@ -5,8 +5,11 @@
 
 namespace app::eggtimer {
 
+    constexpr int DEFAULT_SECONDS = 300;
+
     struct Config {
-        int total_seconds = 0;
+        int total_seconds = DEFAULT_SECONDS;
+        bool dry_run = false;
     };
 
     class CliError : public std::runtime_error {

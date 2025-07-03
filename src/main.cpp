@@ -26,6 +26,10 @@ int main(int argc, char** argv) {
 
     try {
         app::eggtimer::Config config = app::eggtimer::parse_cli_options(argc, argv);
+        if (config.dry_run) {
+            spdlog::info("dry run: {} seconds", config.total_seconds);
+            return 0;
+        }
         spdlog::info("Parsed timeout: {} seconds", config.total_seconds);
     } catch (const app::eggtimer::CliError& e) {
         spdlog::error("CLI Error: {}", e.what());

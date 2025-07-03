@@ -29,7 +29,8 @@ TEST_CASE("CLI Option Parsing - Help", "[cli]") {
     char* argv[] = {(char*)"eggtimer-app", (char*)"--help", nullptr};
     int argc = sizeof(argv) / sizeof(argv[0]) - 1;
 
-    REQUIRE_THROWS_AS(app::eggtimer::parse_cli_options(argc, argv), app::eggtimer::CliError);
+    auto config = app::eggtimer::parse_cli_options(argc, argv);
+    REQUIRE(config.dry_run);
 }
 
 TEST_CASE("CLI Option Parsing - Invalid Hours Format", "[cli]") {

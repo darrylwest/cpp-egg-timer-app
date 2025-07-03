@@ -18,7 +18,9 @@ namespace app::eggtimer {
             auto result = options.parse(argc, argv);
 
             if (result.count("help")) {
-                throw CliError(options.help());
+                std::println("{}", options.help());
+                config.dry_run = true;
+                return config;
             }
 
             if (result.count("hours")) {
