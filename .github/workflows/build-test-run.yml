@@ -1,0 +1,71 @@
+name: Build, Test and Run
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: darrylwest/ubuntu24-gpp1420:latest
+
+    strategy:
+      matrix:
+        build_type: [Release]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install system dependencies
+      run: |
+        apt-get update
+        apt-get install -y \
+          cmake \
+          ninja-build \
+          git
+        
+        # Verify installation
+        gcc --version
+        g++ --version
+        cmake --version
+
+    - name: Install Catch2
+      run: |
+        git clone https://github.com/catchorg/Catch2.git
+        cd Catch2
+        git checkout v3.7.1
+        cmake -B build -S . -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=/usr/local
+        cmake --build build --parallel $(nproc)
+        cmake --build build --target install
+        cd ..
+
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DCMAKE_CXX_STANDARD=23 \
+          -G Ninja \
+          -DCMAKE_PREFIX_PATH=/usr/local
+
+    - name: Show Versions
+      run: |
+        gcc --version
+        g++ --version
+        cmake --version
+
+    - name: Build
+      run: |
+        cmake --build build --parallel $(nproc)
+
+    - name: Run tests
+      run: |
+        echo "=== Running unit tests ==="
+        ./build/unit_tests
+
+    - name: Run
+      run: |
+        echo "=== Running eggtimer-app ==="
+        ./build/eggtimer-app
