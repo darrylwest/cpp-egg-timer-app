@@ -32,6 +32,8 @@ namespace app::eggtimer {
 
             if (result.count("run-command")) {
                 config.runner_command = result["run-command"].as<std::string>();
+            } else {
+                config.runner_command = DEFAULT_RUNNER_COMMAND;
             }
 
             if (result.count("time")) {

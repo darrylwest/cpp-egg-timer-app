@@ -6,6 +6,7 @@
 namespace app::eggtimer {
 
     constexpr int DEFAULT_SECONDS = 300;
+    static constexpr std::string_view DEFAULT_RUNNER_COMMAND = "afplay /System/Library/Sounds/Funk.aiff";
 
     struct Config {
         int total_seconds = DEFAULT_SECONDS;
