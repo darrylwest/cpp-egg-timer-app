@@ -18,7 +18,7 @@ namespace app::eggtimer {
 
         spdlog::info("Starting egg timer for {} seconds...", total_seconds);
         if (!quiet) {
-            std::cout << "Starting egg timer for " << total_seconds << " seconds..." << std::endl;
+            std::cout << "Starting egg timer for " << total_seconds << " seconds..." << '\n';
         }
 
         for (int i = total_seconds; i > 0; --i) {
@@ -28,14 +28,14 @@ namespace app::eggtimer {
                 }
             }
             if (!quiet) {
-                std::cout << ".";
+                std::cout << "." << std::flush;
             }
 
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
 
         if (!quiet) {
-            std::cout << "\n" << green() << "Time's up!" << reset() << std::endl;
+            std::cout << "\n" << green() << "Time's up!" << reset() << '\n';
         }
         spdlog::info("Egg timer finished.");
     }
