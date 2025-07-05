@@ -98,7 +98,7 @@ set(DEPENDENT_LIBRARIES
 
 # Add executables
 add_executable(eggtimer-app ${SRC_DIR}/main.cpp ${SRC_DIR}/cli.cpp ${SRC_DIR}/timer.cpp ${SRC_DIR}/command_executor.cpp ${SRC_DIR}/runner.cpp)
-add_executable(unit_tests tests/main_unit.cpp tests/cli_tests.cpp ${SRC_DIR}/cli.cpp ${SRC_DIR}/command_executor.cpp)
+add_executable(unit_tests tests/main_unit.cpp tests/cli_tests.cpp tests/timer_tests.cpp ${SRC_DIR}/cli.cpp ${SRC_DIR}/timer.cpp ${SRC_DIR}/command_executor.cpp)
 add_executable(integration_tests tests/main_integration.cpp tests/integration_tests.cpp ${SRC_DIR}/command_executor.cpp)
 
 # Function to set up target properties

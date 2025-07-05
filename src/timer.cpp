@@ -2,7 +2,7 @@
 
 #include <app/timer.hpp>
 #include <chrono>
-#include <print>
+#include <iostream>
 #include <termio/termio.hpp>
 #include <thread>
 
@@ -17,18 +17,26 @@ namespace app::eggtimer {
         }
 
         spdlog::info("Starting egg timer for {} seconds...", total_seconds);
-        if (!quiet) std::println("Starting egg timer for {} seconds...", total_seconds);
+        if (!quiet) {
+            std::cout << "Starting egg timer for " << total_seconds << " seconds..." << std::endl;
+        }
 
         for (int i = total_seconds; i > 0; --i) {
             if (i % 10 == 0) {
-                if (!quiet) std::print("\n{}Time remaining: {} seconds{}", yellow(), i, reset());
+                if (!quiet) {
+                    std::cout << "\n" << yellow() << "Time remaining: " << i << " seconds" << reset();
+                }
             }
-            if (!quiet) std::print(".");
+            if (!quiet) {
+                std::cout << ".";
+            }
 
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
 
-        std::println("\n{}Time's up!{}", green(), reset());
+        if (!quiet) {
+            std::cout << "\n" << green() << "Time's up!" << reset() << std::endl;
+        }
         spdlog::info("Egg timer finished.");
     }
 
