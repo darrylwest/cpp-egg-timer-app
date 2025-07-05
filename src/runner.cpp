@@ -14,7 +14,7 @@ namespace app::eggtimer {
         auto cmd = context.runner_command;
 
         spdlog::info("Running default timer for {} seconds.", seconds);
-        countdown(seconds);
+        countdown(seconds, context.quiet);
         try {
             std::string output = execute_command(cmd);
             spdlog::info("Command output: \n{}", output);

@@ -8,7 +8,7 @@
 
 namespace app::eggtimer {
 
-    void countdown(int total_seconds) {
+    void countdown(int total_seconds, bool quiet) {
         using namespace termio::termio;
 
         if (total_seconds <= 0) {
@@ -17,13 +17,14 @@ namespace app::eggtimer {
         }
 
         spdlog::info("Starting egg timer for {} seconds...", total_seconds);
+        if (!quiet) std::println("Starting egg timer for {} seconds...", total_seconds);
 
         for (int i = total_seconds; i > 0; --i) {
             if (i % 10 == 0) {
-                // std::print("\n{}Time remaining: {} seconds{}", yellow(), i, reset());
-                std::cout << yellow() << "Time remaining: " << i << " seconds" << reset();
+                if (!quiet) std::print("\n{}Time remaining: {} seconds{}", yellow(), i, reset());
             }
-            std::cout << "." ;
+            if (!quiet) std::print(".");
+
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
 

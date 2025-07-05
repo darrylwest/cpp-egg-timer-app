@@ -1,5 +1,5 @@
-#include <catch2/catch_all.hpp>
 #include <app/cli.hpp>
+#include <catch2/catch_all.hpp>
 
 TEST_CASE("CLI Option Parsing - Seconds", "[cli]") {
     char* argv[] = {(char*)"eggtimer-app", (char*)"--seconds", (char*)"30", nullptr};

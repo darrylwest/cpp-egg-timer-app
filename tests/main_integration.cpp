@@ -3,20 +3,19 @@
 //
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() function
 
-#include <catch2/catch_all.hpp>
 #include <spdlog/spdlog.h>
+
+#include <catch2/catch_all.hpp>
 #include <print>
 #include <termio/termio.hpp>
 #include <vendor/perftimer.hpp>
 
 // Include the integration tests
 
-
 perftimer::PerfTimer timer("Catch2 Integration Tests");
 using namespace termio::termio;
 
 struct MainTestSetup {
-
     MainTestSetup() {
         spdlog::set_level(spdlog::level::critical);
 

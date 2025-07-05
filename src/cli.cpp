@@ -32,7 +32,7 @@ namespace app::eggtimer {
             }
 
             if (result.count("quiet")) {
-                config.dry_run = result["dry-run"].as<bool>();
+                config.quiet = result["quiet"].as<bool>();
             }
 
             if (result.count("run-command")) {

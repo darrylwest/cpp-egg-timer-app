@@ -1,7 +1,7 @@
 #pragma once
 
-#include <format>
 #include <app/cli.hpp>
+#include <format>
 
 namespace app::eggtimer {
 
@@ -9,7 +9,7 @@ namespace app::eggtimer {
         explicit Runner(const Config& config);
         void run();
 
-    private:
+      private:
         Config context;
     };
 
