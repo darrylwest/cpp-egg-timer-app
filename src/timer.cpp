@@ -20,13 +20,14 @@ namespace app::eggtimer {
 
         for (int i = total_seconds; i > 0; --i) {
             if (i % 10 == 0) {
-                std::print("\n{}Time remaining: {} seconds{}", yellow(), i, reset());
+                // std::print("\n{}Time remaining: {} seconds{}", yellow(), i, reset());
+                std::cout << yellow() << "Time remaining: " << i << " seconds" << reset();
             }
-            std::print(".");
+            std::cout << "." ;
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
 
-        std::println("{}Time's up!{}", green(), reset());
+        std::println("\n{}Time's up!{}", green(), reset());
         spdlog::info("Egg timer finished.");
     }
 

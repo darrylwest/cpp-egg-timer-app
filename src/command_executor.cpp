@@ -7,7 +7,7 @@
 namespace app::eggtimer {
 
     std::string execute_command(const std::string& command) {
-        std::array<char, 128> buffer;
+        std::array<char, 128> buffer{};
         std::string result;
         FILE* pipe = popen(command.c_str(), "r");
         if (!pipe) {

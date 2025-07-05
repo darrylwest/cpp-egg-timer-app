@@ -1,33 +1,16 @@
 #pragma once
 
-#include <memory>
-#include <string>
+#include <format>
+#include <app/cli.hpp>
 
 namespace app::eggtimer {
 
-    class IRunner {
-      public:
-        virtual ~IRunner() = default;
-        virtual void run() = 0;
-    };
+    struct Runner {
+        explicit Runner(const Config& config);
+        void run();
 
-    class DefaultTimerRunner : public IRunner {
-      public:
-        explicit DefaultTimerRunner(int total_seconds);
-        void run() override;
-
-      private:
-        int m_total_seconds;
-    };
-
-    class CustomCommandRunner : public IRunner {
-      public:
-        explicit CustomCommandRunner(int total_seconds, const std::string& command);
-        void run() override;
-
-      private:
-        int m_total_seconds;
-        std::string m_command;
+    private:
+        Config context;
     };
 
 }  // namespace app::eggtimer

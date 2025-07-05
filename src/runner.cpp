@@ -3,28 +3,23 @@
 #include <app/command_executor.hpp>
 #include <app/runner.hpp>
 #include <app/timer.hpp>
+#include <print>
 
 namespace app::eggtimer {
 
-    DefaultTimerRunner::DefaultTimerRunner(int total_seconds) : m_total_seconds(total_seconds) {}
+    Runner::Runner(const Config& config) : context(config) {}
 
-    void DefaultTimerRunner::run() {
-        spdlog::info("Running default timer for {} seconds.", m_total_seconds);
-        countdown(m_total_seconds);
-    }
+    void Runner::run() {
+        auto seconds = context.total_seconds;
+        auto cmd = context.runner_command;
 
-    CustomCommandRunner::CustomCommandRunner(int total_seconds, const std::string& command)
-        : m_total_seconds(total_seconds), m_command(command) {}
-
-    void CustomCommandRunner::run() {
-        spdlog::info("Running custom command runner for {} seconds, command: '{}'.", m_total_seconds, m_command);
-        countdown(m_total_seconds);
+        spdlog::info("Running default timer for {} seconds.", seconds);
+        countdown(seconds);
         try {
-            std::string output = execute_command(m_command);
+            std::string output = execute_command(cmd);
             spdlog::info("Command output: \n{}", output);
         } catch (const CommandExecutionError& e) {
             spdlog::error("Command execution failed: {}", e.what());
         }
     }
-
 }  // namespace app::eggtimer

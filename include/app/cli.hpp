@@ -11,7 +11,8 @@ namespace app::eggtimer {
     struct Config {
         int total_seconds = DEFAULT_SECONDS;
         bool dry_run = false;
-        std::string runner_command;
+        std::string runner_command = std::string(DEFAULT_RUNNER_COMMAND);
+        bool quiet = false;
     };
 
     class CliError : public std::runtime_error {

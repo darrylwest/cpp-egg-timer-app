@@ -16,6 +16,7 @@ namespace app::eggtimer {
                 "m,minutes", "Timeout in minutes", cxxopts::value<int>())("t,time", "Timeout in hours (H:M format)",
                                                                           cxxopts::value<std::string>())(
                 "d,dry-run", "Dry run mode", cxxopts::value<bool>()->default_value("false"))(
+                "q,quiet", "Quiet mode", cxxopts::value<bool>()->default_value("false"))(
                 "c,run-command", "Command to run after timer", cxxopts::value<std::string>())("h,help", "Print help");
 
             auto result = options.parse(argc, argv);
@@ -27,6 +28,10 @@ namespace app::eggtimer {
             }
 
             if (result.count("dry-run")) {
+                config.dry_run = result["dry-run"].as<bool>();
+            }
+
+            if (result.count("quiet")) {
                 config.dry_run = result["dry-run"].as<bool>();
             }
 
