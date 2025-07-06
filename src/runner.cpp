@@ -18,6 +18,7 @@ namespace app::eggtimer {
         try {
             std::string output = execute_command(cmd);
             spdlog::info("Command output: \n{}", output);
+            std::println("{}", output);
         } catch (const CommandExecutionError& e) {
             spdlog::error("Command execution failed: {}", e.what());
         }

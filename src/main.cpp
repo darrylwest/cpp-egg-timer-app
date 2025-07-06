@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
         }
 
         if (config.dry_run) {
-            std::println("dry run: {} seconds", config.total_seconds);
+            std::println("dry run: {} seconds, runner: {}", config.total_seconds, config.runner_command);
             return 0;
         }
 
